@@ -16,12 +16,15 @@ EXPIRE = 259200
 def set_video_id():
     if VIDEO_ID is None:
         raise Exception
+    redis.set('video_id', VIDEO_ID)
+    redis.expire('video_id', EXPIRE)
 
-    return redis.set('video_id', VIDEO_ID)
+    return
 
 
 def del_video_id():
-    return redis.delete('video_id')
+    redis.delete('video_id')
+    return
 
 
 def set_message(message):
